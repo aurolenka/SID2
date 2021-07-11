@@ -18,9 +18,14 @@
         $email    = mysqli_real_escape_string($con, $email);
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
-        $create_datetime = date("Y-m-d H:i:s");
-        $query    = "INSERT into `users` (username, password, email, create_datetime)
-                     VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime')";
+        $branch = stripslashes($_REQUEST['branch']);
+        $branch = mysqli_real_escape_string($con, $branch);
+        $year = stripslashes($_REQUEST['year']);
+        $year = mysqli_real_escape_string($con, $year);
+        $domain = stripslashes($_REQUEST['domain']);
+        $domain = mysqli_real_escape_string($con, $domain);
+        $query    = "INSERT into `users` (username, password, email, branch, year, domain)
+                     VALUES ('$username', '" . md5($password) . "', '$email', '$branch', '$year', '$domain')";
         $result   = mysqli_query($con, $query);
         if ($result) {
             echo "<div class='form'>
@@ -40,6 +45,9 @@
         <input type="text" class="login-input" name="username" placeholder="Username" required />
         <input type="text" class="login-input" name="email" placeholder="Email Adress">
         <input type="password" class="login-input" name="password" placeholder="Password">
+        <input type="branch" class="login-input" name="branch" placeholder="Branch">
+        <input type="year" class="login-input" name="year" placeholder="Year">
+        <input type="domain" class="login-input" name="domain" placeholder="Domain">
         <input type="submit" name="submit" value="Register" class="login-button">
         <p class="link">Already have an account? <a href="login.php">Login here</a></p>
     </form>
